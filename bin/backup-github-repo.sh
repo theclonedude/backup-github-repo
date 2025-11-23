@@ -7,16 +7,18 @@ include_json=true
 while [[ "$#" -gt 0 ]]; do
     case "$1" in
         --help)
-            echo "USAGE: backup-github-repo [--no-html] [URL]"
+            echo "USAGE: backup-github-repo [--no-html|--no-json] [URL]"
             exit 1
             ;;
 
         --no-json)
             include_json=false
+            url="${2}"
             ;;
 
         --no-html)
             include_html=false
+            url="${2}"
             ;;
 
         *)
@@ -26,14 +28,18 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-[ -e ".git" ] || [ "$url" != "" ] || {
-  echo "this isn't a git repository and no repository URL was passed" && exit 1
-}
+if [ ! -e ".git" ] && [ "$url" == "" ]; then
+  echo "This isn't a git repository and no repository URL was passed" && exit 1
+fi
 
 if [ "$url" != "" ] ; then
   folder_name=$(backup-github-repo_get_repository_name "$url" | sed 's|/|_|g')
 else
   folder_name="repo-backup"
+fi
+
+if [ "$folder_name" = "" ]; then
+  exit 1
 fi
 
 mkdir -p "${folder_name}/html/assets"
@@ -43,3 +49,6 @@ mkdir -p "${folder_name}/html"
 backup-github-repo_init_config
 ${include_json} && download-github-repo-json "$folder_name" "$url"
 ${include_html} && download-github-repo-html "$folder_name" "$url"
+
+# Prevent "include_html" to trigger an unnecessary non-zero exit code
+true

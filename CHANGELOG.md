@@ -1,6 +1,9 @@
 # CHANGELOG
 *versions follow [SemVer](http://semver.org)*
 
+## 1.3.0 - 2025-11-23
+* Added `--no-html` and `--no-json` options (thanks @djmitche https://github.com/maxlath/backup-github-repo/pull/13)
+
 ## 1.2.0 - 2021-10-26
 * Allow to specify a repository by passing a URL
 

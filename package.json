@@ -42,5 +42,9 @@
   },
   "engines": {
     "node": ">= 7.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/maxlath/backup-github-issues"
   }
 }

@@ -48,9 +48,8 @@ const init = async () => {
 We recommand setting a configuration file to store a GitHub API token.
 
 Using a token increases the number of API requests we can make, see https://developer.github.com/v3/#rate-limiting
-Get a new token at https://github.com/settings/tokens
-Public repo: no special permission required.
-Private repo: require authorization: [repo: Full control of private repositories]
+Get a new token at https://github.com/settings/personal-access-tokens
+Required permissions: read access to content, issues, pull requests
 
 Create a configuration file? [Y/n]
 :
